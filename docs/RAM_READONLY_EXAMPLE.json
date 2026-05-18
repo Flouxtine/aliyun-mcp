@@ -1,0 +1,25 @@
+{
+  "Version": "1",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecs:DescribeInstances",
+        "ecs:DescribeInstanceAttribute",
+        "ecs:DescribeRegions",
+        "vpc:DescribeVpcs",
+        "vpc:DescribeVSwitches",
+        "vpc:DescribeRegions",
+        "tag:ListTagResources",
+        "tag:ListSupportResourceTypes",
+        "bssopenapi:QueryBillOverview",
+        "bssopenapi:QueryAccountBill",
+        "cms:DescribeAlertHistoryList",
+        "cms:DescribeSystemEventAttribute",
+        "actiontrail:LookupEvents",
+        "sts:AssumeRole"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
