@@ -1,0 +1,59 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Install Aliyun MCP dependencies",
+			"type": "shell",
+			"command": "/Users/zane/Downloads/aliyun_mcp/.venv/bin/python",
+			"args": [
+				"-m",
+				"pip",
+				"install",
+				"-r",
+				"/Users/zane/Downloads/aliyun_mcp/requirements.txt"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Install Aliyun MCP dependencies with uv",
+			"type": "shell",
+			"command": "uv",
+			"args": [
+				"pip",
+				"install",
+				"-r",
+				"/Users/zane/Downloads/aliyun_mcp/requirements.txt",
+				"--python",
+				"/Users/zane/Downloads/aliyun_mcp/.venv/bin/python"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Stop Aliyun MCP",
+			"type": "shell",
+			"command": "pkill",
+			"args": [
+				"-f",
+				"main.py --transport"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Start Aliyun MCP HTTP",
+			"type": "shell",
+			"command": "/bin/bash",
+			"args": [
+				"/Users/zane/Downloads/aliyun_mcp/run_mcp_http.sh"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

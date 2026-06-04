@@ -14,6 +14,7 @@
 - 账单：`QueryBillOverview`
 - 监控：云监控 `DescribeAlertHistoryList`
 - 审计：ActionTrail `LookupEvents`
+- 日志服务：SLS Project/Logstore 列表与 `GetLogs` 日志查询，可用于已投递到 SLS 的访问日志/流量日志分析
 - 账号描述、区域与运维常量的 MCP Resources；中文 Prompt 模板
 
 ## 环境要求
@@ -41,6 +42,28 @@ cp .env.example .env
 
 - 显式指定 profile：`ALIYUN_ACCOUNT_STAGING_CLI_PROFILE=prod-ops`
 - 不指定 profile：MCP 自动尝试 `staging` 与 `default`
+
+### Landing Zone（Resource Directory）自动发现子账号
+
+如果你有大量子账号，不想逐个配置 AK/SK，可启用 RD 自动发现：
+
+1. 仅配置一个“管理账号”逻辑账号（AK/SK 或 CLI profile）。
+2. 在各子账号创建同名只读角色（如 `ReadOnlyForMcp`），并信任管理账号扮演。
+3. 打开 RD 自动发现开关，MCP 会自动生成子账号逻辑账号（底层通过 STS AssumeRole）。
+
+示例环境变量：
+
+```env
+ALIYUN_RD_AUTO_DISCOVERY=true
+ALIYUN_RD_MANAGER_ACCOUNT_KEY=rd_manager
+ALIYUN_RD_ROLE_NAME=ReadOnlyForMcp
+ALIYUN_RD_ROLE_SESSION_NAME=aliyun-mcp
+ALIYUN_RD_ACCOUNT_KEY_PREFIX=rd
+ALIYUN_RD_DEFAULT_REGION=cn-shanghai
+# ALIYUN_RD_INCLUDE_SUSPENDED=false
+```
+
+自动生成的账号标识格式为 `rd_{子账号ID}`，例如 `rd_1234567890123456`。
 
 ## 启动
 
